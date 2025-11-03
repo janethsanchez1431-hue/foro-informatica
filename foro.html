@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForoTech Rosa - Comunidad de Informática</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables de colores */
+        :root {
+            --rosa-claro: #f8e2e7;
+            --rosa-medio: #f2c4d1;
+            --rosa-oscuro: #e6a8ba;
+            --rosa-acento: #d97c9b;
+            --texto-oscuro: #5a3a46;
+            --texto-claro: #8a6470;
+            --blanco: #ffffff;
+            --sombra: rgba(217, 124, 155, 0.2);
+        }
+        
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--rosa-claro);
+            color: var(--texto-oscuro);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--rosa-acento);
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--texto-oscuro);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        button, .btn {
+            background-color: var(--rosa-acento);
+            color: var(--blanco);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        button:hover, .btn:hover {
+            background-color: var(--texto-oscuro);
+            transform: translateY(-2px);
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--rosa-oscuro), var(--rosa-acento));
+            color: var(--blanco);
+            padding: 20px 0;
+            box-shadow: 0 4px 12px var(--sombra);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: var(--blanco);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-actions a {
+            color: var(--blanco);
+            margin-left: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--blanco);
+            transition: all 0.3s;
+        }
+        
+        .user-actions a:hover {
+            background-color: var(--blanco);
+            color: var(--rosa-acento);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: var(--blanco);
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid var(--blanco);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--rosa-medio);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--texto-oscuro);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--texto-claro);
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .foro-container {
+            flex: 3;
+        }
+        
+        .sidebar {
+            flex: 1;
+            background-color: var(--blanco);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px var(--sombra);
+        }
+        
+        /* Secciones del foro */
+        .seccion-foro {
+            background-color: var(--blanco);
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--sombra);
+        }
+        
+        .seccion-header {
+            background: linear-gradient(to right, var(--rosa-medio), var(--rosa-oscuro));
+            color: var(--blanco);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .seccion-header h2 {
+            font-size: 22px;
+        }
+        
+        .hilos-lista {
+            padding: 0;
+        }
+        
+        .hilo-item {
+            display: flex;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--rosa-claro);
+            transition: background-color 0.3s;
+        }
+        
+        .hilo-item:hover {
+            background-color: var(--rosa-claro);
+        }
+        
+        .hilo-item:last-child {
+            border-bottom: none;
+        }
+        
+        .hilo-icono {
+            margin-right: 15px;
+            color: var(--rosa-acento);
+            font-size: 20px;
+        }
+        
+        .hilo-contenido {
+            flex: 1;
+        }
+        
+        .hilo-titulo {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .hilo-meta {
+            color: var(--texto-claro);
+            font-size: 14px;
+        }
+        
+        .hilo-estadisticas {
+            text-align: right;
+            min-width: 100px;
+        }
+        
+        .hilo-respuestas {
+            font-weight: bold;
+            color: var(--rosa-acento);
+            font-size: 18px;
+        }
+        
+        .hilo-vistas {
+            font-size: 14px;
+            color: var(--texto-claro);
+        }
+        
+        /* Sidebar */
+        .sidebar h3 {
+            color: var(--rosa-acento);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--rosa-claro);
+        }
+        
+        .sidebar-widget {
+            margin-bottom: 25px;
+        }
+        
+        .lista-miembros {
+            list-style: none;
+        }
+        
+        .miembro {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        
+        .miembro:hover {
+            background-color: var(--rosa-claro);
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--rosa-medio);
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-weight: bold;
+        }
+        
+        .miembro-info {
+            flex: 1;
+        }
+        
+        .miembro-nombre {
+            font-weight: 500;
+        }
+        
+        .miembro-rol {
+            font-size: 12px;
+            color: var(--texto-claro);
+        }
+        
+        .estadisticas-foro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .estadistica {
+            background-color: var(--rosa-claro);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .estadistica-valor {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--rosa-acento);
+        }
+        
+        .estadistica-label {
+            font-size: 14px;
+            color: var(--texto-claro);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--rosa-oscuro), var(--rosa-acento));
+            color: var(--blanco);
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-col ul li a {
+            color: var(--blanco);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        /* Modales */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--blanco);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            color: var(--rosa-acento);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--texto-claro);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--texto-oscuro);
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--rosa-acento);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Página de hilo */
+        .hilo-detalle {
+            background-color: var(--blanco);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px var(--sombra);
+        }
+        
+        .hilo-header {
+            border-bottom: 1px solid var(--rosa-claro);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .hilo-titulo-grande {
+            font-size: 24px;
+            color: var(--texto-oscuro);
+            margin-bottom: 10px;
+        }
+        
+        .respuestas {
+            margin-top: 30px;
+        }
+        
+        .respuesta {
+            padding: 20px;
+            border-bottom: 1px solid var(--rosa-claro);
+            display: flex;
+        }
+        
+        .respuesta:last-child {
+            border-bottom: none;
+        }
+        
+        .respuesta-avatar {
+            margin-right: 15px;
+        }
+        
+        .respuesta-contenido {
+            flex: 1;
+        }
+        
+        .respuesta-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .respuesta-autor {
+            font-weight: 500;
+            color: var(--rosa-acento);
+        }
+        
+        .respuesta-fecha {
+            color: var(--texto-claro);
+            font-size: 14px;
+        }
+        
+        .respuesta-texto {
+            line-height: 1.6;
+        }
+        
+        .nueva-respuesta {
+            margin-top: 30px;
+            background-color: var(--blanco);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px var(--sombra);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .user-actions {
+                margin-top: 15px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .respuesta {
+                flex-direction: column;
+            }
+            
+            .respuesta-avatar {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-laptop-code"></i> ForoTech Rosa
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#">Foros</a></li>
+                    <li><a href="#">Miembros</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Recursos</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions" id="userActions">
+                <a href="#" id="loginBtn">Iniciar Sesión</a>
+                <a href="#" id="registerBtn">Registrarse</a>
+            </div>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <img src="https://i.pravatar.cc/40?img=5" alt="Usuario">
+                <span id="userName">AnaTech</span>
+                <a href="#" id="logoutBtn" style="margin-left: 15px;">Cerrar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Comunidad de Tecnología e Informática</h1>
+            <p>Un espacio para compartir conocimientos, resolver dudas y conectar con otros apasionados por la tecnología</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Foro Principal -->
+        <div class="foro-container">
+            <!-- Sección 1 -->
+            <div class="seccion-foro">
+                <div class="seccion-header">
+                    <h2><i class="fas fa-code"></i> Programación y Desarrollo</h2>
+                    <span>125 Hilos</span>
+                </div>
+                <div class="hilos-lista">
+                    <div class="hilo-item" data-hilo="1">
+                        <div class="hilo-icono"><i class="fas fa-file-alt"></i></div>
+                        <div class="hilo-contenido">
+                            <div class="hilo-titulo">¿Cuál es el mejor lenguaje para comenzar en programación?</div>
+                            <div class="hilo-meta">Por <a href="#">AnaTech</a> • Hace 3 horas</div>
+                        </div>
+                        <div class="hilo-estadisticas">
+                            <div class="hilo-respuestas">42</div>
+                            <div class="hilo-vistas">1.2k vistas</div>
+                        </div>
+                    </div>
+                    <div class="hilo-item" data-hilo="2">
+                        <div class="hilo-icono"><i class="fas fa-file-alt"></i></div>
+                        <div class="hilo-contenido">
+                            <div class="hilo-titulo">Problemas con React Hooks - Ayuda con useEffect</div>
+                            <div class="hilo-meta">Por <a href="#">DevRosa</a> • Hace 5 horas</div>
+                        </div>
+                        <div class="hilo-estadisticas">
+                            <div class="hilo-respuestas">18</div>
+                            <div class="hilo-vistas">856 vistas</div>
+                        </div>
+                    </div>
+                    <div class="hilo-item" data-hilo="3">
+                        <div class="hilo-icono"><i class="fas fa-file-alt"></i></div>
+                        <div class="hilo-contenido">
+                            <div class="hilo-titulo">Mi experiencia migrando de JavaScript a TypeScript</div>
+                            <div class="hilo-meta">Por <a href="#">CodeMaster</a> • Ayer</div>
+                        </div>
+                        <div class="hilo-estadisticas">
+                            <div class="hilo-respuestas">31</div>
+                            <div class="hilo-vistas">1.5k vistas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 2 -->
+            <div class="seccion-foro">
+                <div class="seccion-header">
+                    <h2><i class="fas fa-desktop"></i> Hardware y Componentes</h2>
+                    <span>89 Hilos</span>
+                </div>
+                <div class="hilos-lista">
+                    <div class="hilo-item" data-hilo="4">
+                        <div class="hilo-icono"><i class="fas fa-file-alt"></i></div>
+                        <div class="hilo-contenido">
+                            <div class="hilo-titulo">Recomendaciones para construir PC gamer con presupuesto limitado</div>
+                            <div class="hilo-meta">Por <a href="#">GamerPro</a> • Hace 2 horas</div>
+                        </div>
+                        <div class="hilo-estadisticas">
+                            <div class="hilo-respuestas">27</div>
+                            <div class="hilo-vistas">943 vistas</div>
+                        </div>
+                    </div>
+                    <div class="hilo-item" data-hilo="5">
+                        <div class="hilo-icono"><i class="fas fa-file-alt"></i></div>
+                        <div class="hilo-contenido">
+                            <div class="hilo-titulo">Problemas de sobrecalentamiento en portátil</div>
+                            <div class="hilo-meta">Por <a href="#">TechUser</a> • Hace 7 horas</div>
+                        </div>
+                        <div class="hilo-estadisticas">
+                            <div class="hilo-respuestas">14</div>
+                            <div class="hilo-vistas">672 vistas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón para crear nuevo hilo -->
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="newThreadBtn" class="btn"><i class="fas fa-plus"></i> Crear Nuevo Hilo</button>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-widget">
+                <h3><i class="fas fa-users"></i> Miembros Activos</h3>
+                <ul class="lista-miembros">
+                    <li class="miembro">
+                        <div class="avatar">AT</div>
+                        <div class="miembro-info">
+                            <div class="miembro-nombre">AnaTech</div>
+                            <div class="miembro-rol">Moderadora</div>
+                        </div>
+                    </li>
+                    <li class="miembro">
+                        <div class="avatar">DR</div>
+                        <div class="miembro-info">
+                            <div class="miembro-nombre">DevRosa</div>
+                            <div class="miembro-rol">Miembro Premium</div>
+                        </div>
+                    </li>
+                    <li class="miembro">
+                        <div class="avatar">CM</div>
+                        <div class="miembro-info">
+                            <div class="miembro-nombre">CodeMaster</div>
+                            <div class="miembro-rol">Experto</div>
+                        </div>
+                    </li>
+                    <li class="miembro">
+                        <div class="avatar">GP</div>
+                        <div class="miembro-info">
+                            <div class="miembro-nombre">GamerPro</div>
+                            <div class="miembro-rol">Miembro</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3><i class="fas fa-chart-bar"></i> Estadísticas del Foro</h3>
+                <div class="estadisticas-foro">
+                    <div class="estadistica">
+                        <div class="estadistica-valor">1,245</div>
+                        <div class="estadistica-label">Miembros</div>
+                    </div>
+                    <div class="estadistica">
+                        <div class="estadistica-valor">4,892</div>
+                        <div class="estadistica-label">Hilos</div>
+                    </div>
+                    <div class="estadistica">
+                        <div class="estadistica-valor">32,567</div>
+                        <div class="estadistica-label">Respuestas</div>
+                    </div>
+                    <div class="estadistica">
+                        <div class="estadistica-valor">28</div>
+                        <div class="estadistica-label">En línea</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3><i class="fas fa-calendar-alt"></i> Eventos Próximos</h3>
+                <div class="evento">
+                    <strong>Webinar: Introducción a Python</strong>
+                    <p>15 de Octubre - 18:00 hrs</p>
+                </div>
+                <div class="evento">
+                    <strong>Meetup: Mujeres en Tech</strong>
+                    <p>22 de Octubre - 16:00 hrs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>ForoTech Rosa</h3>
+                    <p>Una comunidad inclusiva para amantes de la tecnología. Comparte, aprende y conecta.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Foros</a></li>
+                        <li><a href="#">Reglas</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="#">Programación</a></li>
+                        <li><a href="#">Hardware</a></li>
+                        <li><a href="#">Ciberseguridad</a></li>
+                        <li><a href="#">Inteligencia Artificial</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 ForoTech Rosa - Todos los derechos reservados
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Iniciar Sesión</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="close-modal">Cancelar</button>
+                    <button type="submit">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Registrarse</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nombre de Usuario</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electrónico</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Contraseña</label>
+                    <input type="password" id="registerConfirmPassword" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="close-modal">Cancelar</button>
+                    <button type="submit">Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Nuevo Hilo -->
+    <div class="modal" id="newThreadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Crear Nuevo Hilo</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="newThreadForm">
+                <div class="form-group">
+                    <label for="threadTitle">Título</label>
+                    <input type="text" id="threadTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="threadCategory">Categoría</label>
+                    <select id="threadCategory" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="programacion">Programación y Desarrollo</option>
+                        <option value="hardware">Hardware y Componentes</option>
+                        <option value="ciberseguridad">Ciberseguridad</option>
+                        <option value="ia">Inteligencia Artificial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="threadContent">Contenido</label>
+                    <textarea id="threadContent" rows="6" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="close-modal">Cancelar</button>
+                    <button type="submit">Publicar Hilo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Página de Hilo (oculta inicialmente) -->
+    <div id="threadPage" style="display: none;">
+        <div class="container">
+            <div class="hilo-detalle">
+                <div class="hilo-header">
+                    <h1 class="hilo-titulo-grande" id="threadTitleDetail">¿Cuál es el mejor lenguaje para comenzar en programación?</h1>
+                    <div class="hilo-meta">
+                        Por <span id="threadAuthor">AnaTech</span> • <span id="threadDate">Hace 3 horas</span> • 
+                        <span id="threadCategoryDetail">Programación y Desarrollo</span>
+                    </div>
+                </div>
+                <div class="hilo-contenido-detalle" id="threadContentDetail">
+                    <p>Hola a todos, estoy interesado en comenzar a aprender programación pero no sé por dónde empezar. He investigado un poco y veo que hay muchos lenguajes: Python, JavaScript, Java, C++, etc.</p>
+                    <p>Me gustaría saber cuál recomiendan para un principiante absoluto. ¿Qué lenguaje es más amigable para empezar? ¿Cuál tiene más salida laboral? ¿Es mejor empezar con uno más sencillo aunque tenga menos aplicaciones?</p>
+                    <p>Agradezco cualquier consejo o experiencia que puedan compartir. ¡Gracias!</p>
+                </div>
+            </div>
+
+            <div class="respuestas">
+                <h3><i class="fas fa-comments"></i> Respuestas (<span id="replyCount">2</span>)</h3>
+                
+                <div class="respuesta">
+                    <div class="respuesta-avatar">
+                        <div class="avatar">CM</div>
+                    </div>
+                    <div class="respuesta-contenido">
+                        <div class="respuesta-header">
+                            <div class="respuesta-autor">CodeMaster</div>
+                            <div class="respuesta-fecha">Hace 2 horas</div>
+                        </div>
+                        <div class="respuesta-texto">
+                            <p>Hola, en mi opinión Python es excelente para empezar. Tiene una sintaxis clara y legible que facilita el aprendizaje. Además, es muy versátil y se usa en muchos campos: web, data science, inteligencia artificial, automatización, etc.</p>
+                            <p>Otra ventaja es que tiene una comunidad enorme con muchos recursos para aprender.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="respuesta">
+                    <div class="respuesta-avatar">
+                        <div class="avatar">DR</div>
+                    </div>
+                    <div class="respuesta-contenido">
+                        <div class="respuesta-header">
+                            <div class="respuesta-autor">DevRosa</div>
+                            <div class="respuesta-fecha">Hace 1 hora</div>
+                        </div>
+                        <div class="respuesta-texto">
+                            <p>Coincido con CodeMaster sobre Python, pero también consideraría JavaScript si te interesa el desarrollo web. Con JavaScript puedes hacer tanto frontend como backend, y ver resultados visuales rápidamente puede ser muy motivador para un principiante.</p>
+                            <p>Al final, lo más importante es empezar con algo y ser constante. ¡Mucha suerte!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nueva-respuesta">
+                <h3><i class="fas fa-reply"></i> Deja tu respuesta</h3>
+                <form id="replyForm">
+                    <div class="form-group">
+                        <textarea id="replyContent" rows="5" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Publicar Respuesta</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="backToForum" class="btn"><i class="fas fa-arrow-left"></i> Volver al Foro</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elementos del DOM
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const newThreadBtn = document.getElementById('newThreadBtn');
+        const backToForumBtn = document.getElementById('backToForum');
+        
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const newThreadModal = document.getElementById('newThreadModal');
+        
+        const userActions = document.getElementById('userActions');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        
+        const forumContent = document.querySelector('.main-content');
+        const threadPage = document.getElementById('threadPage');
+        
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const hiloItems = document.querySelectorAll('.hilo-item');
+        
+        // Estado de la aplicación
+        let isLoggedIn = false;
+        let currentUser = null;
+        
+        // Event Listeners
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+        });
+        
+        registerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'flex';
+        });
+        
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+        
+        newThreadBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!isLoggedIn) {
+                alert('Debes iniciar sesión para crear un nuevo hilo');
+                loginModal.style.display = 'flex';
+                return;
+            }
+            newThreadModal.style.display = 'flex';
+        });
+        
+        backToForumBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            forumContent.style.display = 'flex';
+            threadPage.style.display = 'none';
+        });
+        
+        // Cerrar modales
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+                newThreadModal.style.display = 'none';
+            });
+        });
+        
+        // Cerrar modal al hacer clic fuera
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+            if (e.target === newThreadModal) {
+                newThreadModal.style.display = 'none';
+            }
+        });
+        
+        // Formularios
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simulación de login
+            if (email && password) {
+                login(email);
+                loginModal.style.display = 'none';
+                document.getElementById('loginForm').reset();
+            }
+        });
+        
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            // Simulación de registro
+            if (name && email && password) {
+                register(name, email);
+                registerModal.style.display = 'none';
+                document.getElementById('registerForm').reset();
+            }
+        });
+        
+        document.getElementById('newThreadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('threadTitle').value;
+            const category = document.getElementById('threadCategory').value;
+            const content = document.getElementById('threadContent').value;
+            
+            // Aquí normalmente enviaríamos los datos al servidor
+            alert(`Hilo "${title}" creado exitosamente en la categoría ${category}`);
+            newThreadModal.style.display = 'none';
+            document.getElementById('newThreadForm').reset();
+        });
+        
+        document.getElementById('replyForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const content = document.getElementById('replyContent').value;
+            
+            // Aquí normalmente enviaríamos la respuesta al servidor
+            alert('Respuesta publicada exitosamente');
+            document.getElementById('replyContent').value = '';
+        });
+        
+        // Navegación a hilos
+        hiloItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const hiloId = item.getAttribute('data-hilo');
+                openThread(hiloId);
+            });
+        });
+        
+        // Funciones de la aplicación
+        function login(email) {
+            isLoggedIn = true;
+            currentUser = email;
+            userActions.style.display = 'none';
+            userInfo.style.display = 'flex';
+            userName.textContent = email.split('@')[0];
+        }
+        
+        function register(name, email) {
+            isLoggedIn = true;
+            currentUser = email;
+            userActions.style.display = 'none';
+            userInfo.style.display = 'flex';
+            userName.textContent = name;
+        }
+        
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            userActions.style.display = 'flex';
+            userInfo.style.display = 'none';
+        }
+        
+        function openThread(threadId) {
+            // Ocultar el foro y mostrar la página del hilo
+            forumContent.style.display = 'none';
+            threadPage.style.display = 'block';
+            
+            // Aquí normalmente cargaríamos los datos del hilo desde el servidor
+            // Por ahora, usamos datos de ejemplo basados en el ID
+            const threadData = getThreadData(threadId);
+            
+            document.getElementById('threadTitleDetail').textContent = threadData.title;
+            document.getElementById('threadAuthor').textContent = threadData.author;
+            document.getElementById('threadDate').textContent = threadData.date;
+            document.getElementById('threadCategoryDetail').textContent = threadData.category;
+            document.getElementById('threadContentDetail').innerHTML = threadData.content;
+            document.getElementById('replyCount').textContent = threadData.replies;
+        }
+        
+        function getThreadData(threadId) {
+            // Datos de ejemplo para los hilos
+            const threads = {
+                1: {
+                    title: '¿Cuál es el mejor lenguaje para comenzar en programación?',
+                    author: 'AnaTech',
+                    date: 'Hace 3 horas',
+                    category: 'Programación y Desarrollo',
+                    content: `
+                        <p>Hola a todos, estoy interesado en comenzar a aprender programación pero no sé por dónde empezar. He investigado un poco y veo que hay muchos lenguajes: Python, JavaScript, Java, C++, etc.</p>
+                        <p>Me gustaría saber cuál recomiendan para un principiante absoluto. ¿Qué lenguaje es más amigable para empezar? ¿Cuál tiene más salida laboral? ¿Es mejor empezar con uno más sencillo aunque tenga menos aplicaciones?</p>
+                        <p>Agradezco cualquier consejo o experiencia que puedan compartir. ¡Gracias!</p>
+                    `,
+                    replies: 2
+                },
+                2: {
+                    title: 'Problemas con React Hooks - Ayuda con useEffect',
+                    author: 'DevRosa',
+                    date: 'Hace 5 horas',
+                    category: 'Programación y Desarrollo',
+                    content: `
+                        <p>Estoy teniendo problemas para entender el hook useEffect en React. Específicamente, no logro controlar correctamente cuándo se ejecuta.</p>
+                        <p>He intentado usar el array de dependencias pero a veces se ejecuta en bucle infinito y otras veces no se ejecuta cuando debería.</p>
+                        <p>¿Alguien podría explicarme con ejemplos prácticos cómo funciona correctamente useEffect?</p>
+                    `,
+                    replies: 0
+                },
+                3: {
+                    title: 'Mi experiencia migrando de JavaScript a TypeScript',
+                    author: 'CodeMaster',
+                    date: 'Ayer',
+                    category: 'Programación y Desarrollo',
+                    content: `
+                        <p>Hace seis meses decidí migrar mi proyecto de JavaScript a TypeScript y quería compartir mi experiencia.</p>
+                        <p>Al principio fue frustrante lidiar con los tipos, pero después de superar la curva de aprendizaje, la productividad aumentó considerablemente.</p>
+                        <p>Los errores se detectan en tiempo de compilación y el autocompletado es mucho más inteligente. ¡Recomiendo totalmente el cambio!</p>
+                    `,
+                    replies: 0
+                },
+                4: {
+                    title: 'Recomendaciones para construir PC gamer con presupuesto limitado',
+                    author: 'GamerPro',
+                    date: 'Hace 2 horas',
+                    category: 'Hardware y Componentes',
+                    content: `
+                        <p>Tengo un presupuesto de $800 USD para armar una PC gamer y necesito recomendaciones.</p>
+                        <p>Principalmente juego títulos como Valorant, CS:GO y algunos juegos AAA ocasionales. No necesito ultra gráficos, pero sí un rendimiento fluido.</p>
+                        <p>¿Qué componentes recomiendan? ¿Es mejor priorizar la GPU o el procesador?</p>
+                    `,
+                    replies: 0
+                },
+                5: {
+                    title: 'Problemas de sobrecalentamiento en portátil',
+                    author: 'TechUser',
+                    date: 'Hace 7 horas',
+                    category: 'Hardware y Componentes',
+                    content: `
+                        <p>Mi portátil (ASUS TUF Gaming) se sobrecalienta mucho cuando juego, llegando a temperaturas de 90°C.</p>
+                        <p>Ya lo he limpiado por dentro y cambiado la pasta térmica, pero el problema persiste.</p>
+                        <p>¿Alguien ha tenido este problema? ¿Qué soluciones recomiendan?</p>
+                    `,
+                    replies: 0
+                }
+            };
+            
+            return threads[threadId] || threads[1];
+        }
+    </script>
+</body>
+</html>
